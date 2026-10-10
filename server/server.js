@@ -68,8 +68,8 @@ app.get('/api/health', (req, res) => {
   })
 })
 
-// Placeholder for routes (added in Step 6)
-// app.use('/api/auth', require('./routes/auth'))
+// Routes
+app.use('/api/auth', require('./routes/auth'))
 
 // 404 handler
 app.use((req, res) => {
