@@ -71,6 +71,11 @@ app.get('/api/health', (req, res) => {
 // Routes
 app.use('/api/auth', require('./routes/auth'))
 
+// Upload test (dev only — remove after Step 5 verification)
+if (process.env.NODE_ENV === 'development') {
+  app.use('/api/test', require('./routes/uploadTest'))
+}
+
 // 404 handler
 app.use((req, res) => {
   res.status(404).json({ success: false, message: `Route ${req.originalUrl} not found` })
