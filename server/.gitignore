@@ -1,0 +1,11 @@
+node_modules/
+.env
+uploads/*
+private-uploads/*
+!uploads/avatars/.gitkeep
+!uploads/projects/.gitkeep
+!uploads/resume/.gitkeep
+!uploads/testimonials/.gitkeep
+!uploads/logos/.gitkeep
+!private-uploads/freelance-attachments/.gitkeep
+*.log
