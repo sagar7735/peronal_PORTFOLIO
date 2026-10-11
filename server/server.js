@@ -70,6 +70,15 @@ app.get('/api/health', (req, res) => {
 
 // Routes
 app.use('/api/auth', require('./routes/auth'))
+app.use('/api', require('./routes/profile'))
+app.use('/api', require('./routes/skills'))
+app.use('/api', require('./routes/experience'))
+app.use('/api/projects', require('./routes/projects'))
+app.use('/api/services', require('./routes/services'))
+app.use('/api/testimonials', require('./routes/testimonials'))
+app.use('/api/freelance', require('./routes/freelance'))
+app.use('/api/contact', require('./routes/contact'))
+app.use('/api/analytics', require('./routes/analytics'))
 
 // Upload test (dev only — remove after Step 5 verification)
 if (process.env.NODE_ENV === 'development') {
