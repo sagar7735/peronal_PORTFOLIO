@@ -7,6 +7,7 @@ const { getRelativePath } = require('../utils/getRelativePath')
 const { freelanceApplicationSchema } = require('../validators/publicValidators')
 const path = require('path')
 const fs = require('fs')
+const { notifyAdminNewApplication, autoReplyApplicant } = require('../utils/emailService')
 
 // POST /api/freelance/apply (public)
 exports.submitApplication = asyncHandler(async (req, res) => {
@@ -34,7 +35,11 @@ exports.submitApplication = asyncHandler(async (req, res) => {
     data.attachmentPath = getRelativePath(req.file, 'private-uploads/freelance-attachments')
   }
 
-  await FreelanceApplication.create(data)
+  const savedApp = await FreelanceApplication.create(data)
+
+  // Non-blocking emails — fire and forget
+  notifyAdminNewApplication(savedApp)
+  autoReplyApplicant(savedApp)
 
   const msg = isWaitlist
     ? 'You have been added to the waitlist. I will reach out when I become available.'
@@ -78,12 +83,19 @@ exports.getApplication = asyncHandler(async (req, res) => {
 
 // PATCH /api/freelance/admin/:id
 exports.updateApplication = asyncHandler(async (req, res) => {
-  const { status, adminNotes } = req.body
+  const { status, adminNotes, sendEmail: shouldSendEmail } = req.body
   const app = await FreelanceApplication.findById(req.params.id)
   if (!app) throw new ApiError(404, 'Application not found')
   if (status) app.status = status
   if (adminNotes !== undefined) app.adminNotes = adminNotes
   await app.save()
+
+  // Optionally send status update email to client
+  if (shouldSendEmail && status) {
+    const { sendStatusEmail } = require('../utils/emailService')
+    sendStatusEmail(app, status)
+  }
+
   res.json({ success: true, message: 'Application updated', data: app })
 })
 

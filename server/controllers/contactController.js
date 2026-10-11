@@ -2,6 +2,7 @@ const ContactMessage = require('../models/ContactMessage')
 const asyncHandler = require('../utils/asyncHandler')
 const ApiError = require('../utils/ApiError')
 const { contactMessageSchema } = require('../validators/publicValidators')
+const { notifyAdminNewMessage, autoReplyContact } = require('../utils/emailService')
 
 // POST /api/contact (public)
 exports.sendMessage = asyncHandler(async (req, res) => {
@@ -11,7 +12,12 @@ exports.sendMessage = asyncHandler(async (req, res) => {
   const data = { ...result.data, ipAddress: req.ip }
   delete data.website // remove honeypot
 
-  await ContactMessage.create(data)
+  const savedMsg = await ContactMessage.create(data)
+
+  // Non-blocking emails — fire and forget
+  notifyAdminNewMessage(savedMsg)
+  autoReplyContact(savedMsg)
+
   res.status(201).json({ success: true, message: 'Message sent successfully! I will get back to you soon.', data: null })
 })
 
