@@ -7,3 +7,9 @@ private-uploads/*
 !private-uploads/.gitkeep
 *.log
 .DS_Store
+
+.kiro
+client/node_modules/
+server/node_modules/
+server/.env
+client/.env
