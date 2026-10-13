@@ -57,7 +57,7 @@ export const adminFreelanceApi = {
   update: (id, data) => api.patch(`/api/freelance/admin/${id}`, data),
   delete: (id) => api.delete(`/api/freelance/admin/${id}`),
   exportCsv: () => api.get('/api/freelance/admin/export', { responseType: 'blob' }),
-  getAttachmentUrl: (id) => `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/freelance/admin/${id}/attachment`,
+  getAttachmentUrl: (id) => `${import.meta.env.VITE_API_URL || 'https://peronal-portfolio-w98e.onrender.com'}/api/freelance/admin/${id}/attachment`,
 }
 
 export const adminMessagesApi = {

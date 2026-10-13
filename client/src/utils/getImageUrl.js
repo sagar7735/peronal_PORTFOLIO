@@ -1,5 +1,5 @@
 const PLACEHOLDER = '/placeholder.png'
-const BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000'
+const BASE = import.meta.env.VITE_API_URL || 'https://peronal-portfolio-w98e.onrender.com'
 
 export function getImageUrl(path) {
   if (!path) return PLACEHOLDER
