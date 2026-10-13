@@ -20,6 +20,15 @@ const UiPreview = lazy(() => import('./pages/UiPreview'))
 const AdminLogin = lazy(() => import('./pages/admin/Login'))
 const Dashboard = lazy(() => import('./pages/admin/Dashboard'))
 const ComingSoonAdmin = lazy(() => import('./pages/admin/ComingSoonAdmin'))
+const AdminProfile = lazy(() => import('./pages/admin/ProfileSettings'))
+const AdminSkills = lazy(() => import('./pages/admin/Skills'))
+const AdminExperience = lazy(() => import('./pages/admin/Experience'))
+const AdminProjects = lazy(() => import('./pages/admin/Projects'))
+const AdminServices = lazy(() => import('./pages/admin/Services'))
+const AdminFreelance = lazy(() => import('./pages/admin/FreelanceApplications'))
+const AdminMessages = lazy(() => import('./pages/admin/Messages'))
+const AdminTestimonials = lazy(() => import('./pages/admin/Testimonials'))
+const AdminChangePassword = lazy(() => import('./pages/admin/ChangePassword'))
 
 export default function App() {
   return (
@@ -53,15 +62,15 @@ export default function App() {
             >
               <Route index element={<Navigate to="/admin/dashboard" replace />} />
               <Route path="dashboard" element={<Dashboard />} />
-              <Route path="profile" element={<ComingSoonAdmin title="Profile Settings" />} />
-              <Route path="skills" element={<ComingSoonAdmin title="Skills" />} />
-              <Route path="experience" element={<ComingSoonAdmin title="Experience" />} />
-              <Route path="projects" element={<ComingSoonAdmin title="Projects" />} />
-              <Route path="services" element={<ComingSoonAdmin title="Services" />} />
-              <Route path="freelance" element={<ComingSoonAdmin title="Applications" />} />
-              <Route path="messages" element={<ComingSoonAdmin title="Messages" />} />
-              <Route path="testimonials" element={<ComingSoonAdmin title="Testimonials" />} />
-              <Route path="change-password" element={<ComingSoonAdmin title="Change Password" />} />
+              <Route path="profile" element={<AdminProfile />} />
+              <Route path="skills" element={<AdminSkills />} />
+              <Route path="experience" element={<AdminExperience />} />
+              <Route path="projects" element={<AdminProjects />} />
+              <Route path="services" element={<AdminServices />} />
+              <Route path="freelance" element={<AdminFreelance />} />
+              <Route path="messages" element={<AdminMessages />} />
+              <Route path="testimonials" element={<AdminTestimonials />} />
+              <Route path="change-password" element={<AdminChangePassword />} />
             </Route>
           </Routes>
         </Suspense>
