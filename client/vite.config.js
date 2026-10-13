@@ -7,7 +7,7 @@ export default defineConfig({
     port: 5173,
     proxy: {
       '/api': {
-        target: 'http://localhost:5000',
+        target: 'https://peronal-portfolio-w98e.onrender.com',
         changeOrigin: true,
       },
     },
