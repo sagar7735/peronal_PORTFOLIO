@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /ui-preview
+
+Sitemap: https://sagarjena.dev/sitemap.xml
